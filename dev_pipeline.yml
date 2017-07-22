@@ -1,5 +1,5 @@
 - name: Initiate Development Pipeline
-  hosts: pocdb_server
+  hosts: sejam_server
 
 #  vars_prompt:
 #    - name: "githubuser"
