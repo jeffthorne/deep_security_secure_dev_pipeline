@@ -52,7 +52,7 @@ def process_upload():
         print("filename: ", file.filename)
         # if user does not select file, browser also
         # submit a empty part without filename
-        file.save(os.path.join('/Users/jeff/app', file.filename))
+        file.save(os.path.join('/app', file.filename))
 
         return render_template('upload.html', file_name="Thanks for submitting %s. It looks tasty. --colin" % file.filename)
 
