@@ -1,0 +1,17 @@
+- name: Initiate Development Pipeline
+  hosts: pocdb_server
+
+#  vars_prompt:
+#    - name: "githubuser"
+#      prompt: "Enter your github username"
+#      private: no
+#    - name: "githubpassword"
+#      prompt: "Enter your github password"
+#      private: yes
+
+
+  #sudo: True
+  tasks:
+     - name: copy test file
+       become: true
+       copy: src=test.txt dest=/home/ubuntu/test.txt
