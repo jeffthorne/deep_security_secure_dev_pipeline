@@ -1,30 +1,49 @@
 - name: Initiate Colin's Donut's and Burgers Development Pipeline
   hosts: sejam_server
   gather_facts: False
+  vars:
+    github_user: jeffthrone
+    github_repo: jeffthorne/se_jam.git
+    dsas_tenant: TM-1
+    dsas_user: colin_welles@trendmicro.com
+    destination_dir: /home/ubuntu/se_jam
+
 
   vars_prompt:
-      - name: "githubuser"
-        prompt: "Enter your github username"
-        private: no
-      - name: "githubpassword"
+      - name: "github_password"
         prompt: "Enter your github password"
         private: yes
+      - name: "dsas_password"
+        prompt: "Enter your DSaS password"
+        private: yes
+
 
 
   #sudo: True
   tasks:
+
+     - name: Opening code push maintenance window
+       delegate_to: localhost
+       action: dsp3_app_control_on ds_tenant={{ dsas_tenant }} ds_user={{ dsas_user }} ds_password={{ dsas_password }}
+       register: result
+
+     - debug:
+         var: result
+         verbosity: 2
+
+
      - name: remove existing src directory
        become: True
        file:
          state: absent
-         path: /home/ubuntu/se_jam
+         path: "{{ destination_dir }}"
 
      - name: check out github repo
-       git: repo=https://{{ githubuser }}:{{ githubpassword }}@github.com/jeffthorne/se_jam.git dest=/home/ubuntu/se_jam
+       git: repo=https://{{ github_user }}:{{ github_password }}@github.com/{{ github_repo}} dest={{ destination_dir }}
 
 
      - name: Change into src dir
-       command: chdir=/home/ubuntu/se_jam/docker-flask-app ls
+       command: chdir={{ destination_dir }}/docker-flask-app ls
 
      - name: Shutting down containers
        become: True
@@ -40,8 +59,18 @@
 
      - name: Build container
        become: True
-       command: chdir=/home/ubuntu/se_jam/docker-flask-app docker build -t web-app-one:latest .
+       command: chdir={{ destination_dir }}/docker-flask-app docker build -t web-app-one:latest .
 
      - name: Run container
        become: True
-       command: chdir=/home/ubuntu/se_jam/docker-flask-app docker run --dns=8.8.8.8 -d -p 8080:5001 web-app-one
+       command: chdir={{ destination_dir }}/docker-flask-app docker run --dns=8.8.8.8 -d -p 8080:5001 web-app-one
+
+
+     - name: Closing code push maintenance window
+       delegate_to: localhost
+       action: dsp3_app_control_off ds_tenant={{ dsas_tenant }} ds_user={{ dsas_user }} ds_password={{ dsas_password }}
+       register: result
+
+     - debug:
+         var: result
+         verbosity: 2
