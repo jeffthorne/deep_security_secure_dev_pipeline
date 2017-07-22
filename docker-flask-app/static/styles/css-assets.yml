@@ -1,0 +1,8 @@
+css_all:
+    contents:
+        - styles/bootstrap.css
+        - styles/selectize.bootstrap3.css
+        - styles/bootstrap3-datepicker.css
+        - styles/redactor.css
+        - styles/app.css
+        - styles/simple-sidebar.css
