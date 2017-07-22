@@ -19,7 +19,7 @@
          state: absent
          path: /home/ubuntu/se_jam
 
-     - name: check out pocdb github repo
+     - name: check out github repo
        git: repo=https://{{ githubuser }}:{{ githubpassword }}@github.com/jeffthorne/se_jam.git dest=/home/ubuntu/se_jam
 
 
