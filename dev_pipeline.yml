@@ -1,5 +1,6 @@
 - name: Initiate Development Pipeline
   hosts: sejam_server
+  gather_facts: False
 
   vars_prompt:
       - name: "githubuser"
@@ -24,3 +25,23 @@
 
      - name: Change into src dir
        command: chdir=/home/ubuntu/se_jam/docker-flask-app ls
+
+     - name: Shutting down containers
+       become: True
+       service:
+         name: docker
+         state: stopped
+
+     - name: Initializing Docker Engine
+       become: True
+       service:
+         name: docker
+         state: started
+
+     - name: Build container
+       become: True
+       command: chdir=/home/ubuntu/se_jam/docker-flask-app docker build -t web-app-one:latest .
+
+     - name: Run container
+       become: True
+       command: chdir=/home/ubuntu/se_jam/docker-flask-app docker run --dns=8.8.8.8 -d -p 8080:5001 web-app-one
