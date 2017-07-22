@@ -1,4 +1,4 @@
-- name: Initiate Development Pipeline
+- name: Initiate Colin's Donut's and Burgers Development Pipeline
   hosts: sejam_server
   gather_facts: False
 
