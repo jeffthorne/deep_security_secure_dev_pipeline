@@ -1,17 +1,26 @@
 - name: Initiate Development Pipeline
   hosts: sejam_server
 
-#  vars_prompt:
-#    - name: "githubuser"
-#      prompt: "Enter your github username"
-#      private: no
-#    - name: "githubpassword"
-#      prompt: "Enter your github password"
-#      private: yes
+  vars_prompt:
+      - name: "githubuser"
+        prompt: "Enter your github username"
+        private: no
+      - name: "githubpassword"
+        prompt: "Enter your github password"
+        private: yes
 
 
   #sudo: True
   tasks:
-     - name: copy test file
-       become: true
-       copy: src=test.txt dest=/home/ubuntu/test.txt
+     - name: remove existing src directory
+       become: True
+       file:
+         state: absent
+         path: /home/ubuntu/se_jam
+
+     - name: check out pocdb github repo
+       git: repo=https://{{ githubuser }}:{{ githubpassword }}@github.com/jeffthorne/se_jam.git dest=/home/ubuntu/se_jam
+
+
+     - name: Change into src dir
+       command: chdir=/home/ubuntu/se_jam/docker-flask-app ls
