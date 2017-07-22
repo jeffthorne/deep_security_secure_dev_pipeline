@@ -3,7 +3,7 @@
   gather_facts: False
   vars:
     github_user: jeffthrone
-    github_repo: jeffthorne/se_jam.git
+    github_repo: jeffthorne/deep_security_secure_dev_pipeline.git
     dsas_tenant: TM-1
     dsas_user: colin_welles@trendmicro.com
     destination_dir: /home/ubuntu/se_jam

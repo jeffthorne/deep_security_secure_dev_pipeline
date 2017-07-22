@@ -1,2 +1,5 @@
 ansible==2.3.1.0
 docker-py>=1.7.0
+
+--extra-index-url https://testpypi.python.org/pypi
+dsp3
