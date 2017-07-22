@@ -1,12 +1,9 @@
 #!/Users/jeff/playbooks/se_jam/venv/bin/python3.6
 
-from ansible.module_utils.basic import *
-
 import datetime
 import json
+
 from ansible.module_utils.basic import *
-
-
 from dsp3.models.manager import Manager
 
 

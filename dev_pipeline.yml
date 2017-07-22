@@ -7,6 +7,8 @@
     dsas_tenant: TM-1
     dsas_user: colin_welles@trendmicro.com
     destination_dir: /home/ubuntu/se_jam
+    app_control_duration: 5
+    stall: 10
 
 
   vars_prompt:
@@ -24,7 +26,7 @@
 
      - name: Opening code push maintenance window
        delegate_to: localhost
-       action: dsp3_app_control_on ds_tenant={{ dsas_tenant }} ds_user={{ dsas_user }} ds_password={{ dsas_password }}
+       action: dsp3_app_control_on ds_tenant={{ dsas_tenant }} ds_user={{ dsas_user }} ds_password={{ dsas_password }} duration={{ app_control_duration }} stall={{ stall }}
        register: result
 
      - debug:
