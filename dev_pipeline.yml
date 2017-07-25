@@ -1,14 +1,15 @@
-- name: Initiate Colin's Donut's and Burgers Development Pipeline
+- name: Initializing Fernando's Donuts and Burgers Secure Development Pipeline
   hosts: sejam_server
   gather_facts: False
   vars:
     github_user: jeffthrone
     github_repo: jeffthorne/deep_security_secure_dev_pipeline.git
-    dsas_tenant: TM-1
-    dsas_user: colin_welles@trendmicro.com
+    dsas_tenant: trendmicrobrazil
+    dsas_user: fernando
     destination_dir: /home/ubuntu/se_jam
     app_control_duration: 5
     stall: 10
+    host_id: 33603
 
 
   vars_prompt:
@@ -26,7 +27,7 @@
 
      - name: Opening code push maintenance window
        delegate_to: localhost
-       action: dsp3_app_control_on ds_tenant={{ dsas_tenant }} ds_user={{ dsas_user }} ds_password={{ dsas_password }} duration={{ app_control_duration }} stall={{ stall }}
+       action: dsp3_app_control_on ds_tenant={{ dsas_tenant }} ds_user={{ dsas_user }} ds_password={{ dsas_password }} duration={{ app_control_duration }} stall={{ stall }} host_id={{ host_id }}
        register: result
 
      - debug:
@@ -70,7 +71,7 @@
 
      - name: Closing code push maintenance window
        delegate_to: localhost
-       action: dsp3_app_control_off ds_tenant={{ dsas_tenant }} ds_user={{ dsas_user }} ds_password={{ dsas_password }}
+       action: dsp3_app_control_off ds_tenant={{ dsas_tenant }} ds_user={{ dsas_user }} ds_password={{ dsas_password }} host_id={{ host_id }}
        register: result
 
      - debug:

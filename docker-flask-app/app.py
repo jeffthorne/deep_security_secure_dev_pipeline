@@ -27,8 +27,8 @@ def login():
 @app.route("/process_login", methods=['POST'])
 def process_login():
     print(request.values['email'])
-    if "colin" in request.values['email']:
-        return render_template("recipes.html", fl="welcome back colin")
+    if "fern" in request.values['email']:
+        return render_template("recipes.html", fl="welcome back fernando")
     else:
         return render_template("login.html", fl="invalid login")
 
@@ -54,7 +54,7 @@ def process_upload():
         # submit a empty part without filename
         file.save(os.path.join('/app', file.filename))
 
-        return render_template('upload.html', file_name="Thanks for submitting %s. It looks tasty. --colin" % file.filename)
+        return render_template('upload.html', file_name="Thanks for submitting %s. It looks tasty. --fernando" % file.filename)
 
 
 @app.route('/jbbd')

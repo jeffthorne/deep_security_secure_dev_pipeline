@@ -1,5 +1,5 @@
 [sejam_server]
-34.212.85.3 ansible_become=true ansible_become_methode=su ansible_become_user=root ansible_become_pass=ubuntu ansible_ssh_host=34.212.85.3 ansible_ssh_port=22 ansible_ssh_private_key_file=/Users/jeff/playbooks/se_jam/Ubuntu_container.pem ansible_python_interpreter=/usr/bin/python3.5
+34.207.103.140 ansible_become=true ansible_become_methode=su ansible_become_user=root ansible_become_pass=ubuntu ansible_ssh_host=34.207.103.140  ansible_ssh_port=22 ansible_ssh_private_key_file=/Users/jeff/playbooks/se_jam/DockerLab.pem ansible_python_interpreter=/usr/bin/python3.5
 
 
 [local]
