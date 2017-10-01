@@ -1,4 +1,4 @@
 Flask==0.12
 PyYAML==3.11
 Flask-Assets==0.12
-
+netifaces==0.10.6

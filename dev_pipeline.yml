@@ -2,13 +2,13 @@
   hosts: sejam_server
   gather_facts: False
   vars:
-    github_user: jeffthrone
+    github_user: jeffthorne
     github_repo: jeffthorne/deep_security_secure_dev_pipeline.git
     dsas_tenant: trendmicrobrazil
     dsas_user: fernando
     destination_dir: /home/ubuntu/se_jam
     app_control_duration: 5
-    stall: 10
+    stall: 20
     host_id: 33603
 
 
@@ -37,6 +37,7 @@
 
      - name: remove existing src directory
        become: True
+       become_user: root
        file:
          state: absent
          path: "{{ destination_dir }}"

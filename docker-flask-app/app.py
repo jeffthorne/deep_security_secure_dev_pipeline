@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, flash, redirect
 from flask_assets import Environment
 from webassets import loaders
 
+import netifaces as ni   
+
 app = Flask(__name__, static_folder='static', static_url_path='/static')
 app.config['DEBUG'] = True
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -35,6 +37,23 @@ def process_login():
 @app.route("/upload")
 def upload():
     return render_template('upload.html', file_name="")
+
+@app.route("/headers")
+def headers():
+    host = request.headers['host']
+    xforward = ""
+    webserver_ip = ""
+    try:
+        webserver_ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
+    except ValueError:
+        webserver_ip = ni.ifaddresses('en0')[ni.AF_INET][0]['addr']
+
+    try:
+        xforward = request.headers['X-Forwarded-For']
+    except KeyError:
+        xforward = "not provided"
+
+    return render_template('headers.html', host=host, webserver_ip=webserver_ip, xforward=xforward)
 
 
 @app.route('/process_upload', methods=['GET', 'POST'])
